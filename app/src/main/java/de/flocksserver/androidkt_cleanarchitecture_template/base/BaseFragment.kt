@@ -20,9 +20,8 @@ abstract class BaseFragment : Fragment() {
         retainInstance = true
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val fragmentView: View = (inflater?.inflate(getLayoutResource(), container, false) as View)
-        return fragmentView
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return (inflater.inflate(getLayoutResource(), container, false) as View)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -33,6 +32,6 @@ abstract class BaseFragment : Fragment() {
     protected abstract fun initialize()
 
     protected fun <C> getComponent(componentType: Class<C>): C {
-        return componentType.cast((activity as HasComponent<*>).getComponent())
+        return componentType.cast((activity as HasComponent<*>).getComponent())!!
     }
 }

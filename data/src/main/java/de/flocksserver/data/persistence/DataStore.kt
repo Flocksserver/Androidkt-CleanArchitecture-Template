@@ -27,31 +27,31 @@ class DataStore @Inject constructor(private val contentMMapper: ContentMMapper) 
 
     override fun getContent(): Single<ContentModel> {
         logger.info { "DATASTORE -> get content" }
-        return Single.fromCallable({
+        return Single.fromCallable {
             val contentData = getContentData()
             contentMMapper.transformDMtoM(contentData)
-        })
+        }
     }
 
     override fun addItem(): Completable {
         logger.info { "DATASTORE -> add random string item" }
-        return Completable.fromCallable({
+        return Completable.fromCallable {
             val contentData = getContentData()
             val content = contentMMapper.transformDMtoM(contentData)
             val item = ItemModel(textService.generateText())
             content.items?.add(item)
             sharedPrefs.edit().putStringSet("content",contentMMapper.transformMtoDM(content)?.items).apply()
-        })
+        }
     }
 
     override fun deleteItem(itemModel: ItemModel): Completable {
         logger.info { "DATASTORE -> delete item $itemModel" }
-        return Completable.fromCallable({
+        return Completable.fromCallable {
             val contentData = getContentData()
             val content = contentMMapper.transformDMtoM(contentData)
             content.items?.remove(itemModel)
             sharedPrefs.edit().putStringSet("content",contentMMapper.transformMtoDM(content)?.items).apply()
-        })
+        }
     }
 
 

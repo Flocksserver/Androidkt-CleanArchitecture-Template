@@ -11,7 +11,7 @@ import javax.inject.Inject
 class ContentMMapper @Inject constructor() : BaseMapperDMM<ContentModel, ContentDataModel>() {
 
     override fun transformDMtoM(dataModel: ContentDataModel?): ContentModel {
-        val items = dataModel?.items?.map { ItemModel(it) }?.sortedWith(compareBy({it.name}))?.toMutableList()
+        val items = dataModel?.items?.map { ItemModel(it) }?.sortedWith(compareBy {it.name})?.toMutableList()
         return ContentModel(items)
     }
 
