@@ -22,10 +22,6 @@ open class App : Application() {
         applicationComponent.inject(this)
     }
 
-    override fun onTerminate() {
-        super.onTerminate()
-    }
-
     companion object {
         operator fun get(context: Context): App {
             return context.applicationContext as App
